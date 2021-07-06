@@ -1,6 +1,6 @@
 <template>
     <div  class="flex flex-col h-63 w-49 absolute top-1/4 left-1/4">
-    <div class="h-7">{{message}}</div>
+
         <div class="h-14">
             <div class="float-left h-1/2"> {{time}}</div>
             <div class="float-right grid grid-cols-3 gap-4">
@@ -26,39 +26,44 @@ export default {
                 this.getTime();
                 return [this.thisYear,this.thisMonth,this.today]
             }
-
         }
     },
     data(){
         return {
-            message:"",
+            //衍生状态-核心状态
+            //衍生状态是基于其他变量进行改变而改变的，比如time是由thisMonth和thisYear进行拼接形成的
+            //在thisMonth和thisYear没有改变的情况下，time不会改变，所以可以通过写到computed减少计算量
+            //相似的还有monthStartWeek和monthDays，两者都是在thisMonth和thisYear确定的情况下确定的
+            //也就是两者的值是被thisMonth和thisYear决定的，属于衍生状态
+            //本组件核心状态就只有thisMonth和thisYear，两者决定了展示的数据，所以展示的数据calendarData也
+            //属于衍生状态，可以设为computed，
+            //除核心状态之外的都是衍生状态，设计时应尽可能的考虑节省性能
+            //
+            //常量：定义之后不会进行改变的量，比如本次的week，命名要大写，多个单词之间下划线链接
+            //
+            //考虑v-model，看源码，单项数据流，不要怕麻烦
             clendarData:[],
             thisMonth:null,//当前月
             thisYear:null,//当前年
             thisDay:null,//当前日
             thisDate:null,//当前星期
             today:null,//今天
-            lastMonth:null,//下一个月
-            nextMonth:null,//上一个月
+            // lastMonth:null,//下一个月
+            // nextMonth:null,//上一个月
             time:"",//显示时间
-            week:["日","一","二","三","四","五","六"],
+            WEEK:["日","一","二","三","四","五","六"],//常量名称大写加下划线
             monthStartWeek:null,
             monthDays:null,//月天数
             selectTime:null,
-            //lastChooseDay:null,
         }
     },
     created(){
-        if(this.setTime){
-            this.thisYear=this.setTime[0];
-            this.thisMonth=this.setTime[1];
-            this.thisDay=this.setTime[2];
-        }
-        //this.getTime();
-        this.setCalendarData(this.thisYear,this.thisMonth);
-
+        this.ResolveSetTime();
+        
     },
     computed:{
+        
+        
 
     },
     methods:{
@@ -80,9 +85,19 @@ export default {
             let week=date.getDay();
             return week;
         },
+        setCss(status){
+            let s="rounded hover:bg-gray-200 ";
+            if(status==-1||status==1){
+                s+="text-gray-400";
+            }else if(status==2){
+                s+="bg-blue-300 text-white";
+            }else if(status==3){
+                s+="text-red-500";
+            }
+            return s;
+        },
         setCalendarData(year,month){
             this.monthStartWeek=this.getMonthStartWeek(year,month-1);
-            //console.log(this.monthStartWeek);
             this.monthDays=this.getMonthDays(year,month);
             let lastMonthDays=this.getMonthDays(year,month-1);
             this.clendarData=[];
@@ -99,7 +114,6 @@ export default {
             if(this.thisDay){
                 //this.lastChooseDay=this.monthStartWeek+this.thisDay-1;
                 this.clendarData[this.monthStartWeek+this.thisDay-1].status=2;           
-                //console.log(this.thisDay+"已标为2");
             }      
              let date = new Date();
              let thisYear = date.getFullYear();
@@ -107,7 +121,6 @@ export default {
              let thisDate=date.getDate();
             if(this.thisYear==thisYear&&this.thisMonth==thisMonth){
                 this.clendarData[this.monthStartWeek+thisDate-1].status=3;
-                //console.log(thisDate+"已标为3");
             }     
         },
         changeMonth(num){
@@ -136,42 +149,24 @@ export default {
                 this.changeMonth(status);
             }
             this.$nextTick(() => {
-                this.message= "当前选中："+this.thisYear+"年"+this.thisMonth+"月"+this.thisDay+"日";
                 this.selectTime=[this.thisYear,this.thisMonth,this.thisDay];
                 this.$emit('changeTime',this.selectTime);
             });
-            //console.log("点击了"+this.thisDay);
         },
-        setCss(status){
-            let s="rounded hover:bg-gray-200 ";
-            if(status==-1||status==1){
-                s+="text-gray-400";
-                //console.log(status,s);
-            }else if(status==2){
-                s+="bg-blue-300 text-white";
-                //console.log(status,s);
-            }else if(status==3){
-                s+="text-red-500";
-                //console.log(status,s);
-            }
-            return s;
+        resolveSetTime(){
+            this.thisYear=this.setTime[0];
+            this.thisMonth=this.setTime[1];
+            this.thisDay=this.setTime[2];
+            return this.setCalendarData(this.thisYear,this.thisMonth);
         }
     },
     watch:{
-        "setTime":function(val){           
-            this.thisYear=val[0];
-            this.thisMonth=val[1];
-            this.thisDay=val[2];
-            this.setCalendarData(this.thisYear,this.thisMonth);
-            this.message= "当前选中："+this.thisYear+"年"+this.thisMonth+"月"+this.thisDay+"日";
-        }
+        setTime:'resolveSetTime',
     }   
 }
 
 </script>
 
 <style>
-.test{
-    @apply rounded hover:bg-gray-200 focus:bg-blue-300 focus:text-white ;
-}
+
 </style>
