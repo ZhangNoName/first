@@ -20,6 +20,14 @@
 <script>
 export default {
     props:{
+        setTime:{
+            type:Array,
+            default:()=>{
+                this.getTime();
+                return [this.thisYear,this.thisMonth,this.today]
+            }
+
+        }
     },
     data(){
         return {
@@ -41,7 +49,12 @@ export default {
         }
     },
     created(){
-        this.getTime();
+        if(this.setTime){
+            this.thisYear=this.setTime[0];
+            this.thisMonth=this.setTime[1];
+            this.thisDay=this.setTime[2];
+        }
+        //this.getTime();
         this.setCalendarData(this.thisYear,this.thisMonth);
 
     },
@@ -53,24 +66,25 @@ export default {
             var date = new Date();
             this.thisYear = date.getFullYear();
             this.thisMonth= date.getMonth() + 1;//monthIndex+1
+            this.today=date.getDate();
             //var day = date.getDate();
             this.time=this.thisYear+"年"+this.thisMonth+"月";
         },
         getMonthDays(year,month){//获取month月天数
-            var date=new Date(year,month,0);
-            var days=date.getDate();
+            let date=new Date(year,month,0);
+            let days=date.getDate();
             return days;
         },
         getMonthStartWeek(year,monthIndex){
-            var date=new Date(year,monthIndex,1);
-            var week=date.getDay();
+            let date=new Date(year,monthIndex,1);
+            let week=date.getDay();
             return week;
         },
         setCalendarData(year,month){
             this.monthStartWeek=this.getMonthStartWeek(year,month-1);
             //console.log(this.monthStartWeek);
             this.monthDays=this.getMonthDays(year,month);
-            var lastMonthDays=this.getMonthDays(year,month-1);
+            let lastMonthDays=this.getMonthDays(year,month-1);
             this.clendarData=[];
             for(let i=0;i<this.monthStartWeek;i++){
                 this.clendarData.push({day:lastMonthDays-this.monthStartWeek+1+i,status:-1});
@@ -144,6 +158,13 @@ export default {
         }
     },
     watch:{
+        "setTime":function(val){           
+            this.thisYear=val[0];
+            this.thisMonth=val[1];
+            this.thisDay=val[2];
+            this.setCalendarData(this.thisYear,this.thisMonth);
+            this.message= "当前选中："+this.thisYear+"年"+this.thisMonth+"月"+this.thisDay+"日";
+        }
     }   
 }
 
