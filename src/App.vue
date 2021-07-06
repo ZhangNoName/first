@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-
-    <calendar></calendar>
+    <div class="">  
+      {{message}}
+    </div>
+    <calendar  @changeTime="setMsg"></calendar>
   </div>
 </template>
 
@@ -12,6 +14,20 @@ export default {
   name: 'App',
   components: {
     calendar
+  },
+  data(){
+    return {
+      date:[],
+      message:"",
+    }
+  },
+  methods:{
+    setMsg(val){
+      this.date=val;
+      this.message=this.date[0]+"年"+this.date[1]+"月"+this.date[2]+"日";
+    }
+  },
+  watch:{
   }
 }
 </script>

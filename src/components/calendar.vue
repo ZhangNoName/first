@@ -19,6 +19,8 @@
 </template>
 <script>
 export default {
+    props:{
+    },
     data(){
         return {
             message:"",
@@ -34,6 +36,7 @@ export default {
             week:["日","一","二","三","四","五","六"],
             monthStartWeek:null,
             monthDays:null,//月天数
+            selectTime:null,
             //lastChooseDay:null,
         }
     },
@@ -120,7 +123,8 @@ export default {
             }
             this.$nextTick(() => {
                 this.message= "当前选中："+this.thisYear+"年"+this.thisMonth+"月"+this.thisDay+"日";
-                
+                this.selectTime=[this.thisYear,this.thisMonth,this.thisDay];
+                this.$emit('changeTime',this.selectTime);
             });
             //console.log("点击了"+this.thisDay);
         },
