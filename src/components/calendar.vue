@@ -1,8 +1,9 @@
 <template>
-    <div  class="flex flex-col h-56 w-49 absolute top-1/4 left-1/4">
+    <div  class="flex flex-col h-63 w-49 absolute top-1/4 left-1/4">
+    <div class="h-7">{{message}}</div>
         <div class="h-14">
             <div class="float-left h-1/2"> {{time}}</div>
-            <div class="float-right grid grid-cols-3 gap-4h-1/2">
+            <div class="float-right grid grid-cols-3 gap-4">
                 <button @click="changeMonth(-1)" class="rounded hover:bg-gray-200">上月</button>
                 <button @click="reSet()" class="rounded hover:bg-gray-200">本月</button>
                 <button @click="changeMonth(1)" class="rounded hover:bg-gray-200">下月</button>
@@ -12,7 +13,7 @@
             </div>
         </div>
         <div class="grid grid-cols-7 grid-rows-6 h-42 w-full">
-            <div tabindex = "0" v-for="(item,index) in clendarData" :key="index" @click="chooseDay(item.day)"  :class="setCss(item.status)">{{item.day}}</div>
+            <div tabindex = "0" v-for="(item,index) in clendarData" :key="index" @click="chooseDay(item.day,item.status)"  :class="setCss(item.status)">{{item.day}}</div>
         </div>
     </div>
 </template>
@@ -20,6 +21,7 @@
 export default {
     data(){
         return {
+            message:"",
             clendarData:[],
             thisMonth:null,//当前月
             thisYear:null,//当前年
@@ -32,7 +34,7 @@ export default {
             week:["日","一","二","三","四","五","六"],
             monthStartWeek:null,
             monthDays:null,//月天数
-            lastChooseDay:null,
+            //lastChooseDay:null,
         }
     },
     created(){
@@ -68,21 +70,20 @@ export default {
             var lastMonthDays=this.getMonthDays(year,month-1);
             this.clendarData=[];
             for(let i=0;i<this.monthStartWeek;i++){
-                this.clendarData.push({day:lastMonthDays-this.monthStartWeek+1+i,status:0});
+                this.clendarData.push({day:lastMonthDays-this.monthStartWeek+1+i,status:-1});
             }
             for(let i=1;i<=this.monthDays;i++){
-                this.clendarData.push({day:i,status:1});
+                this.clendarData.push({day:i,status:0});
             }
             for(let i=1;this.clendarData.length<42;i++){
-                this.clendarData.push({day:i,status:0});
+                this.clendarData.push({day:i,status:1});
             }
             this.time=this.thisYear+"年"+this.thisMonth+"月";
             if(this.thisDay){
-                this.lastChooseDay=this.monthStartWeek+this.thisDay-1;
+                //this.lastChooseDay=this.monthStartWeek+this.thisDay-1;
                 this.clendarData[this.monthStartWeek+this.thisDay-1].status=2;           
                 //console.log(this.thisDay+"已标为2");
             }      
-            
              let date = new Date();
              let thisYear = date.getFullYear();
              let thisMonth= date.getMonth() + 1;
@@ -107,16 +108,25 @@ export default {
             this.getTime();
             this.setCalendarData(this.thisYear,this.thisMonth);
         },
-        chooseDay(day){
-            this.thisDay=day;
-            if(this.lastChooseDay){
-                this.clendarData[this.lastChooseDay].status=1;
+        chooseDay(day,status){
+            if(this.thisDay){
+                this.clendarData[this.monthStartWeek+this.thisDay-1].status=0;
             }
-            console.log(this.thisDay);
+            //this.lastChooseDay=this.monthStartWeek+this.thisDay-1;
+            this.thisDay=day;
+            this.clendarData[this.monthStartWeek+this.thisDay-1].status=2;
+            if(status==-1 || status==1){
+                this.changeMonth(status);
+            }
+            this.$nextTick(() => {
+                this.message= "当前选中："+this.thisYear+"年"+this.thisMonth+"月"+this.thisDay+"日";
+                
+            });
+            //console.log("点击了"+this.thisDay);
         },
         setCss(status){
-            var s="rounded hover:bg-gray-200 focus:bg-blue-300 focus:text-white ";
-            if(status==0){
+            let s="rounded hover:bg-gray-200 ";
+            if(status==-1||status==1){
                 s+="text-gray-400";
                 //console.log(status,s);
             }else if(status==2){
