@@ -13,7 +13,8 @@
     <div class="">  
       {{message}}
     </div>
-    <calendar :setTime="date" @changeTime="setMsg"></calendar>
+    <!-- <calendar :setTime="date" @changeTime="setMsg"></calendar> -->
+    <calendar v-model="date"></calendar>
   </div>
 </template>
 
@@ -28,15 +29,22 @@ export default {
   data(){
     return {
       date:[2021,6,1],
-      message:"",
+     // message:"",
       year:null,
       month:null,
+    }
+  },
+  computed:{
+    message(){
+      //this.date=val;
+      return this.date[0]+"年"+this.date[1]+"月"+this.date[2]+"日";
+      //console.log(typeof(year))
     }
   },
   methods:{
     setMsg(val){
       this.date=val;
-      this.message=this.date[0]+"年"+this.date[1]+"月"+this.date[2]+"日";
+      //this.message=this.date[0]+"年"+this.date[1]+"月"+this.date[2]+"日";
       //console.log(typeof(year))
     }
   },

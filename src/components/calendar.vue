@@ -20,13 +20,19 @@
 <script>
 export default {
     props:{
-        setTime:{
-            type:Array,
-            default:()=>{
-                this.getTime();
-                return [this.thisYear,this.thisMonth,this.today]
-            }
-        }
+        // setTime:{
+        //     type:Array,
+        //     default:()=>{
+        //         this.getTime();
+        //         return [this.thisYear,this.thisMonth,this.today]
+        //     }
+        // },
+        setTime:Array,//必须定义一个接收父组件进行传参的变量，函数参考下面model的prop
+        
+    },
+    model:{
+        prop:'setTime',//定义接收父组件v-model绑定的值，名称须和props中定义相同
+        event:'test',//自定义时间名称，v-model本质为单向数据流，双向传参由v-on和v-bind组成，定义的v-on事件名称为test（可以任意定义）                    //子组件像父组件传值可以通过$emit('test',值)的形式完成传递，
     },
     data(){
         return {
@@ -148,7 +154,9 @@ export default {
             }
             this.$nextTick(() => {
                 this.selectTime=[this.thisYear,this.thisMonth,this.thisDay];
-                this.$emit('changeTime',this.selectTime);
+                //this.$emit('changeTime',this.selectTime);
+                this.$emit('test',this.selectTime);
+                console.log(this.setTime);
             });
         },
         resolveSetTime(){
