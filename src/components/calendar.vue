@@ -9,7 +9,7 @@
                 <button @click="changeMonth(1)" class="rounded hover:bg-gray-200">下月</button>
             </div>
             <div class="grid grid-cols-7 h-1/2 w-full">
-                 <div v-for="(item,index) in WEEK" :key="index" class="active:bg-red-300">{{item}}</div>
+                 <div v-for="(item,index) in WEEK" :key="index" >{{item}}</div>
             </div>
         </div>
         <div class="grid grid-cols-7 grid-rows-6 h-42 w-full">
@@ -48,11 +48,20 @@ export default {
             //常量：定义之后不会进行改变的量，比如本次的week，命名要大写，多个单词之间下划线链接
             //
             //考虑v-model，看源码，单项数据流，不要怕麻烦
+
+            //编码风格，根据vue官方建议来改，在vue官网风格指南
+            //检查格式设置，尽可能简化
+            //watch的三种写法，根据合适的进行，完整的immediately可设置初始化的时候是否执行
+            //带有数字的写清楚数字的名称
+            //尽可能去除不必要变量，如selectTime
+            //熟练使用各种布局，宽度确定，宽度不定。
+            //规范每个模块的书写顺序，比如computed，methods，watch等排序
+
             //clendarData:[],
             thisMonth:null,//当前月
             thisYear:null,//当前年
             thisDay:null,//当前日
-            thisDate:null,//当前星期
+            thisDate:null,//当前星期 星期常用weekday
             today:null,//今天
             // lastMonth:null,//下一个月
             // nextMonth:null,//上一个月
@@ -93,7 +102,7 @@ export default {
             return data;
         },
         monthStartWeek(){
-            let date=new Date(this.thisYear,this.thisMonth,1);
+            let date=new Date(this.thisYear,this.thisMonth-1,1);
             let week=date.getDay();
             return week;
         },
@@ -160,7 +169,7 @@ export default {
             });
         },
         resolveSetTime(){
-            this.thisYear=this.setTime[0];
+            this.thisYear=this.setTime[0];//解构赋值，若直接序号访问，则对序号做出说明
             this.thisMonth=this.setTime[1];
             this.thisDay=this.setTime[2];
         }
