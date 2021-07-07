@@ -5,11 +5,11 @@
             <div class="float-left h-1/2"> {{time}}</div>
             <div class="float-right grid grid-cols-3 gap-4">
                 <button @click="changeMonth(-1)" class="rounded hover:bg-gray-200">上月</button>
-                <button @click="reSet()" class="rounded hover:bg-gray-200">本月</button>
+                <button @click="getTime()" class="rounded hover:bg-gray-200">本月</button>
                 <button @click="changeMonth(1)" class="rounded hover:bg-gray-200">下月</button>
             </div>
             <div class="grid grid-cols-7 h-1/2 w-full">
-                 <div v-for="(item,index) in week" :key="index" class="active:bg-red-300">{{item}}</div>
+                 <div v-for="(item,index) in WEEK" :key="index" class="active:bg-red-300">{{item}}</div>
             </div>
         </div>
         <div class="grid grid-cols-7 grid-rows-6 h-42 w-full">
@@ -42,7 +42,7 @@ export default {
             //常量：定义之后不会进行改变的量，比如本次的week，命名要大写，多个单词之间下划线链接
             //
             //考虑v-model，看源码，单项数据流，不要怕麻烦
-            clendarData:[],
+            //clendarData:[],
             thisMonth:null,//当前月
             thisYear:null,//当前年
             thisDay:null,//当前日
@@ -50,21 +50,62 @@ export default {
             today:null,//今天
             // lastMonth:null,//下一个月
             // nextMonth:null,//上一个月
-            time:"",//显示时间
+            //time:"",//显示时间
             WEEK:["日","一","二","三","四","五","六"],//常量名称大写加下划线
-            monthStartWeek:null,
-            monthDays:null,//月天数
+            //monthStartWeek:null,
+            //monthDays:null,//月天数
             selectTime:null,
+
         }
     },
     created(){
-        this.ResolveSetTime();
-        
+        this.resolveSetTime();
     },
     computed:{
-        
-        
-
+        clendarData(){
+            let data=[];
+            for(let i=0;i<this.monthStartWeek;i++){
+                data.push({day:this.lastMonthDays-this.monthStartWeek+1+i,status:-1});
+            }
+            for(let i=1;i<=this.monthDays;i++){
+                data.push({day:i,status:0});
+            }
+            for(let i=1;data.length<42;i++){
+                data.push({day:i,status:1});
+            }   
+            if(this.thisDay){
+                //this.lastChooseDay=this.monthStartWeek+this.thisDay-1;
+                data[this.monthStartWeek+this.thisDay-1].status=2;           
+            }      
+             let date = new Date();
+             let thisYear = date.getFullYear();
+             let thisMonth= date.getMonth() + 1;
+             let thisDate=date.getDate();
+            if(this.thisYear==thisYear&&this.thisMonth==thisMonth){
+                data[this.monthStartWeek+thisDate-1].status=3;
+            }
+            return data;
+        },
+        monthStartWeek(){
+            let date=new Date(this.thisYear,this.thisMonth,1);
+            let week=date.getDay();
+            return week;
+        },
+        monthDays(){
+            let date=new Date(this.thisYear,this.thisMonth,0);
+            let days=date.getDate();
+            return days;
+        },
+        lastMonthDays(){
+            let date=new Date(this.thisYear,this.thisMonth-1,0);
+            let days=date.getDate();
+            return days;
+        },
+        time(){
+            let s="";
+            s=this.thisYear+"年"+this.thisMonth+"月";
+            return s;
+        }
     },
     methods:{
         getTime(){
@@ -73,17 +114,7 @@ export default {
             this.thisMonth= date.getMonth() + 1;//monthIndex+1
             this.today=date.getDate();
             //var day = date.getDate();
-            this.time=this.thisYear+"年"+this.thisMonth+"月";
-        },
-        getMonthDays(year,month){//获取month月天数
-            let date=new Date(year,month,0);
-            let days=date.getDate();
-            return days;
-        },
-        getMonthStartWeek(year,monthIndex){
-            let date=new Date(year,monthIndex,1);
-            let week=date.getDay();
-            return week;
+            //this.time=this.thisYear+"年"+this.thisMonth+"月";
         },
         setCss(status){
             let s="rounded hover:bg-gray-200 ";
@@ -96,33 +127,6 @@ export default {
             }
             return s;
         },
-        setCalendarData(year,month){
-            this.monthStartWeek=this.getMonthStartWeek(year,month-1);
-            this.monthDays=this.getMonthDays(year,month);
-            let lastMonthDays=this.getMonthDays(year,month-1);
-            this.clendarData=[];
-            for(let i=0;i<this.monthStartWeek;i++){
-                this.clendarData.push({day:lastMonthDays-this.monthStartWeek+1+i,status:-1});
-            }
-            for(let i=1;i<=this.monthDays;i++){
-                this.clendarData.push({day:i,status:0});
-            }
-            for(let i=1;this.clendarData.length<42;i++){
-                this.clendarData.push({day:i,status:1});
-            }
-            this.time=this.thisYear+"年"+this.thisMonth+"月";
-            if(this.thisDay){
-                //this.lastChooseDay=this.monthStartWeek+this.thisDay-1;
-                this.clendarData[this.monthStartWeek+this.thisDay-1].status=2;           
-            }      
-             let date = new Date();
-             let thisYear = date.getFullYear();
-             let thisMonth= date.getMonth() + 1;
-             let thisDate=date.getDate();
-            if(this.thisYear==thisYear&&this.thisMonth==thisMonth){
-                this.clendarData[this.monthStartWeek+thisDate-1].status=3;
-            }     
-        },
         changeMonth(num){
             this.thisMonth+=num;
             if(this.thisMonth==0){
@@ -131,18 +135,12 @@ export default {
             }else if(this.thisMonth>12){
                 this.thisMonth=1;
                 this.thisYear++;
-            }
-            this.setCalendarData(this.thisYear,this.thisMonth);    
-        },
-        reSet(){
-            this.getTime();
-            this.setCalendarData(this.thisYear,this.thisMonth);
+            }    
         },
         chooseDay(day,status){
             if(this.thisDay){
                 this.clendarData[this.monthStartWeek+this.thisDay-1].status=0;
             }
-            //this.lastChooseDay=this.monthStartWeek+this.thisDay-1;
             this.thisDay=day;
             this.clendarData[this.monthStartWeek+this.thisDay-1].status=2;
             if(status==-1 || status==1){
@@ -157,7 +155,6 @@ export default {
             this.thisYear=this.setTime[0];
             this.thisMonth=this.setTime[1];
             this.thisDay=this.setTime[2];
-            return this.setCalendarData(this.thisYear,this.thisMonth);
         }
     },
     watch:{
