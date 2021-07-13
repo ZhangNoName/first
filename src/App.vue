@@ -8,6 +8,7 @@
       <!-- <label class="">日：</label>
       <input type="number"> -->
       <button @click="setMsg([parseInt(year),parseInt(month) ,1])" class="ml-10">跳转</button>
+      <base-button text="测试" :btnClick="test"></base-button>
 
     </div>
     <div class="">  
@@ -15,20 +16,32 @@
     </div>
     <!-- <calendar :setTime="date" @changeTime="setMsg"></calendar> -->
     <calendar v-model="date"></calendar>
+    <div>
+      <base-dropdown selectName="测试" :optionMsg="opt"></base-dropdown>
+    </div>
+    <div>
+      <test-layout></test-layout>
+    </div>
   </div>
 </template>
 
 <script>
 import calendar from './components/calendar.vue'
-
+import BaseButton from './components/BaseButton.vue'
+import BaseDropdown from './components/BaseDropDown.vue'
+import testLayout from './components/testLayout.vue'
 export default {
   name: 'App',
   components: {
-    calendar
+    calendar,
+    BaseButton,
+    BaseDropdown,
+    testLayout
   },
   data(){
     return {
       date:[2021,6,1],
+      opt:["第一","第二","第三","第四","第五"],
      // message:"",
       year:null,
       month:null,
@@ -46,10 +59,12 @@ export default {
       this.date=val;
       //this.message=this.date[0]+"年"+this.date[1]+"月"+this.date[2]+"日";
       //console.log(typeof(year))
+    },
+    test(){
+      window.alert("点击");
+      this.date=[2000,1,1]
     }
   },
-  watch:{
-  }
 }
 </script>
 
@@ -61,6 +76,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  flex-direction:column;
 }
 .input{
   @apply w-36 border-solid border-black border-2 rounded;

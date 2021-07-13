@@ -1,24 +1,45 @@
 <template>
-    <div  class="flex flex-col h-63 w-49 absolute top-1/4 left-1/4">
-
+    <div class="flex flex-col h-63 w-49 absolute top-1/4 left-1/4">
         <div class="h-14">
             <div class="float-left h-1/2"> {{time}}</div>
             <div class="float-right grid grid-cols-3 gap-4">
-                <button @click="changeMonth(-1)" class="rounded hover:bg-gray-200">上月</button>
-                <button @click="getTime()" class="rounded hover:bg-gray-200">本月</button>
-                <button @click="changeMonth(1)" class="rounded hover:bg-gray-200">下月</button>
+                <button 
+                    @click="changeMonth(-1)" 
+                    class="rounded hover:bg-gray-200"
+                >上月</button>
+                <button 
+                    class="rounded hover:bg-gray-200"
+                    @click="getTime()" 
+                >本月</button>
+                <button 
+                    class="rounded hover:bg-gray-200"
+                    @click="changeMonth(1)" 
+                >下月</button>
             </div>
             <div class="grid grid-cols-7 h-1/2 w-full">
-                 <div v-for="(item,index) in WEEK" :key="index" >{{item}}</div>
+                <div 
+                    v-for="(item,index) in WEEK" 
+                    :key="index" 
+                >{{item}}</div>
             </div>
         </div>
         <div class="grid grid-cols-7 grid-rows-6 h-42 w-full">
-            <div tabindex = "0" v-for="(item,index) in clendarData" :key="index" @click="chooseDay(item.day,item.status)"  :class="setCss(item.status)">{{item.day}}</div>
+            <div 
+                v-for="(item,index) in clendarData" 
+                :key="index" 
+                tabindex = "0" 
+                :class="setCss(item.status)"
+                @click="chooseDay(item.day,item.status)"  
+            >{{item.day}}</div>
         </div>
     </div>
 </template>
 <script>
 export default {
+    model:{
+        prop:'setTime',//定义接收父组件v-model绑定的值，名称须和props中定义相同
+        event:'test',//自定义事件名称，v-model本质为单向数据流，双向传参由v-on和v-bind组成，定义的v-on事件名称为test（可以任意定义）                    //子组件像父组件传值可以通过$emit('test',值)的形式完成传递，
+    },
     props:{
         // setTime:{
         //     type:Array,
@@ -29,10 +50,6 @@ export default {
         // },
         setTime:Array,//必须定义一个接收父组件进行传参的变量，函数参考下面model的prop
         
-    },
-    model:{
-        prop:'setTime',//定义接收父组件v-model绑定的值，名称须和props中定义相同
-        event:'test',//自定义时间名称，v-model本质为单向数据流，双向传参由v-on和v-bind组成，定义的v-on事件名称为test（可以任意定义）                    //子组件像父组件传值可以通过$emit('test',值)的形式完成传递，
     },
     data(){
         return {
@@ -72,9 +89,6 @@ export default {
             selectTime:null,
 
         }
-    },
-    created(){
-        this.resolveSetTime();
     },
     computed:{
         clendarData(){
@@ -121,6 +135,12 @@ export default {
             s=this.thisYear+"年"+this.thisMonth+"月";
             return s;
         }
+    },
+    watch:{
+        setTime:'resolveSetTime',
+    }, 
+    created(){
+        this.resolveSetTime();
     },
     methods:{
         getTime(){
@@ -174,9 +194,7 @@ export default {
             this.thisDay=this.setTime[2];
         }
     },
-    watch:{
-        setTime:'resolveSetTime',
-    }   
+    
 }
 
 </script>
