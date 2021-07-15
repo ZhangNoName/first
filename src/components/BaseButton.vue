@@ -1,8 +1,9 @@
 <template>
-  <button class="btn" @click="btnClick">{{ text }}</button>
+  <button class="btn"  v-debounce="[btnClick,'click',1000]">{{ text }}</button>
 </template>
 
 <script>
+import {Debounce} from '../views/Debounce'
 export default {
   props: {
     text: {
@@ -15,9 +16,14 @@ export default {
     },
   },
   methods: {
-    selfClick() {
-      this.btnClick().then(() => {});
+    selfClick(){
+      Debounce(this.btnClick,1000)
     },
+    leftClick(){
+
+    }
+    //leftClick:Debounce(this.btnClick(),1000)
+    
   },
 };
 </script>

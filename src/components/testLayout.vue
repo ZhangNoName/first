@@ -7,7 +7,11 @@
 </template>
 
 <script>
+import index from './BaseLayout/index.vue'
 export default {
+  components:{
+    "GoBaseLayout":index
+  }
   
 }
 </script>
