@@ -38,6 +38,27 @@
         tip="请输入"
         ></base-input>
     </div>
+    <div>
+            <el-table
+                :data="tableData"
+                stripe
+                style="width: 100%">
+                <el-table-column
+                    
+                    label="日期"
+                    width="180">
+                </el-table-column>
+                <el-table-column
+                    
+                    label="姓名"
+                    width="180">
+                </el-table-column>
+                <el-table-column
+                    
+                    label="地址">
+                </el-table-column>
+            </el-table>
+        </div>
   </div>
 </template>
 
@@ -63,7 +84,8 @@ export default {
       // message:"",
       year: null,
       month: null,
-      inputMsg:"测试输入框数据"
+      inputMsg:"测试输入框数据",
+      tableData : [[1,2,3],[3,4,5,],[4,5,6],[7,8,9]],
     };
   },
   computed: {

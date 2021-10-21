@@ -32,6 +32,7 @@
                 @click="chooseDay(item.day,item.status)"  
             >{{item.day}}</div>
         </div>
+        
     </div>
 </template>
 <script>
@@ -87,6 +88,7 @@ export default {
             //monthStartWeek:null,
             //monthDays:null,//月天数
             selectTime:null,
+
 
         }
     },
