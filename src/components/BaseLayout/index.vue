@@ -35,9 +35,9 @@ export default {
   padding: 0;
 }
 .base-main-header{
-  background-color: blue;
+  /* background-color: blue; */
   max-height: 200px;
-  min-height: 50px;
+  min-height: 25px;
 }
 .base-main-medium {
   width: 100%;
@@ -47,15 +47,15 @@ export default {
   align-items: stretch;
 }
 .base-main-aside{
-  background-color: green;
+  /* background-color: green; */
 }
 .base-main-main{
-  background-color: red;
+  /* background-color: red; */
   flex: 1 1 auto;
 }
 .base-main-footer{
-  background-color: yellow;
-  min-height: 50px;
-  max-height: 200px;
+  /* background-color: yellow; */
+  min-height: 25px;
+  max-height: 100px;
 }
 </style>
