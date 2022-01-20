@@ -21,7 +21,3 @@ new Vue({
   router,
   render: h => h(App),
 }).$mount('#app')
-/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-this.particlesJS.load('app', '../src/components/bgc-animate/particles.json', function() {
-  console.log('callback - particles.js config loaded');
-});
