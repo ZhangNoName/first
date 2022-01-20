@@ -16,14 +16,16 @@
           </div>
           <div class="navbar-end">
             <a class="navbar-item" target="_blank" href="#">
-              <i class="el-icon-search"></i>
+              <i class="icon-search icon"></i>
             </a>
             <a class="navbar-item" target="_blank" href="#">
-              <i class="icon-github"></i>
+              <i class="icon-github icon"></i>
             </a>
-            <a class="navbar-item" target="_blank" href="#">关于</a>
             <a class="navbar-item" target="_blank" href="#">
-              <i :class="[mode == 'day'?'el-icon-sunny':'el-icon-moon']"></i>
+              <i class="icon-csdn icon"></i>
+            </a>
+            <a class="navbar-item" target="_blank" href="#">
+              <i :class="[mode == 'day'?'icon-day':'night','icon']"></i>
             </a>
           </div>
         </div>
@@ -97,14 +99,27 @@ export default {
     padding: 1.25rem .75rem;
     margin: 0 0;
 }
-.icon-github{
-  content: url("../../assets/github.svg");
+.icon{
   display: inline-block;
   vertical-align: middle;
-  
 	background-repeat: no-repeat;
   background-position: center center;
-  width: 14px;
-  height: 14px;
+  width:25px;
+  height: 25px;
+}
+.icon-github{
+  content: url("../../assets/github.svg");
+}
+.icon-search{
+  content: url("../../assets/search.svg");
+}
+.icon-csdn{
+  content: url("../../assets/csdn.svg");
+}
+.icon-day{
+  content: url("../../assets/day.svg");
+}
+.icon-night{
+  content: url("../../assets/night.svg");
 }
 </style>

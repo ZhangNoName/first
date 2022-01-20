@@ -19,6 +19,10 @@ export default {
   },
   created () {
     window.$app = this
+    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+    window.particlesJS.load('app', '../src/components/bgc-animate/particles.json', function() {
+  console.log('callback - particles.js config loaded');
+});
   },
   methods : {
     reload () {

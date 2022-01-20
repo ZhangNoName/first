@@ -8,6 +8,7 @@ import debounce from './directives/Throttle'
 import BaseLayout from './components/BaseLayout/index.vue'
 import loadMore from './directives/loadMore'
 import './assets/common.css'
+// import particlesJS from '../src/components/bgc-animate/bgc'
 
 Vue.config.productionTip = false//禁止浏览器弹出优化提示
 
@@ -20,3 +21,7 @@ new Vue({
   router,
   render: h => h(App),
 }).$mount('#app')
+/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+this.particlesJS.load('app', '../src/components/bgc-animate/particles.json', function() {
+  console.log('callback - particles.js config loaded');
+});
