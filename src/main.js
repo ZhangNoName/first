@@ -8,7 +8,6 @@ import debounce from './directives/Throttle'
 import BaseLayout from './components/BaseLayout/index.vue'
 import loadMore from './directives/loadMore'
 import './assets/common.css'
-// import particlesJS from '../src/components/bgc-animate/bgc'
 
 Vue.config.productionTip = false//禁止浏览器弹出优化提示
 

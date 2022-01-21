@@ -1,5 +1,5 @@
 /* eslint-disable no-redeclare */
-export function hexToRgb(hex){
+function hexToRgb(hex){
   // By Tim Down - http://stackoverflow.com/a/5624139/3493650
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -14,7 +14,7 @@ export function hexToRgb(hex){
   } : null;
 }
 
-export function draw(pJS,img_obj,p,radius){
+function draw(pJS,img_obj,p,radius){
   pJS.canvas.ctx.drawImage(
     img_obj,
     p.x-radius,
@@ -24,11 +24,11 @@ export function draw(pJS,img_obj,p,radius){
   );
 }
 
-export function clamp(number, min, max) {
+function clamp(number, min, max) {
   return Math.min(Math.max(number, min), max);
 }
 
-export function isInArray(value, array) {
+function isInArray(value, array) {
   return array.indexOf(value) > -1;
 }
 
@@ -52,12 +52,12 @@ window.cancelRequestAnimFrame = ( function() {
     clearTimeout
 } )()
 
-export function init(p){
+function init(p){
   p.opacity_bubble = p.opacity;
   p.radius_bubble = p.radius;
 }
 
-export function process(bubble_param, particles_param, p_obj_bubble, p_obj, id,pJS,dist_mouse,time_spent,p){
+function process(bubble_param, particles_param, p_obj_bubble, p_obj, id,pJS,dist_mouse,time_spent,p){
 
   if(bubble_param != particles_param){
 
