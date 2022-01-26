@@ -40,7 +40,7 @@ export default {
   created () {
     window.$app = this
     // import particlesJS from '../src/components/bgc-animate/bgc.js'
-console.log('进入bgcApp')
+// console.log('进入bgcApp')
 this.particlesJS('particles-js',
   {
     "particles": {
@@ -169,18 +169,20 @@ this.particlesJS('particles-js',
         this.isRouterAlive = true
       })
     },
-    deepExtend (destination, source) {
-  for (var property in source) {
-    if (source[property] && source[property].constructor &&
-     source[property].constructor === Object) {
-      destination[property] = destination[property] || {};
-      arguments.callee(destination[property], source[property]);
-    } else {
-      destination[property] = source[property];
-    }
-  }
-  return destination;
-},
+    //deepExtend (destination, source) {
+    deepExtendFunction(destination, source) {
+     for (var property in source) {
+        if (source[property] && source[property].constructor &&
+        source[property].constructor === Object) {
+          destination[property] = destination[property] || {};
+          //arguments.callee(destination[property], source[property]);
+          this.deepExtendFunction(destination[property], source[property]);
+        } else {
+          destination[property] = source[property];
+        }
+      }
+      return destination;
+    },
 
     /* eslint-disable no-redeclare */
    hexToRgb(hex){
@@ -196,66 +198,66 @@ this.particlesJS('particles-js',
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
   } : null;
-},
+    },
 
- draw(pJS,img_obj,p,radius){
-  pJS.canvas.ctx.drawImage(
-    img_obj,
-    p.x-radius,
-    p.y-radius,
-    radius*2,
-    radius*2 / p.img.ratio
-  );
-},
+    draw(pJS,img_obj,p,radius){
+      pJS.canvas.ctx.drawImage(
+        img_obj,
+        p.x-radius,
+        p.y-radius,
+        radius*2,
+        radius*2 / p.img.ratio
+      );
+    },
 
- clamp(number, min, max) {
-  return Math.min(Math.max(number, min), max);
-},
+    clamp(number, min, max) {
+      return Math.min(Math.max(number, min), max);
+    },
 
- isInArray(value, array) {
-  return array.indexOf(value) > -1;
-},
+    isInArray(value, array) {
+      return array.indexOf(value) > -1;
+    },
 
- init(p){
-  p.opacity_bubble = p.opacity;
-  p.radius_bubble = p.radius;
-},
+    init(p){
+      p.opacity_bubble = p.opacity;
+      p.radius_bubble = p.radius;
+    },
 
- process(bubble_param, particles_param, p_obj_bubble, p_obj, id,pJS,dist_mouse,time_spent,p){
+    process(bubble_param, particles_param, p_obj_bubble, p_obj, id,pJS,dist_mouse,time_spent,p){
 
-  if(bubble_param != particles_param){
+      if(bubble_param != particles_param){
 
-    if(!pJS.tmp.bubble_duration_end){
-      if(dist_mouse <= pJS.interactivity.modes.bubble.distance){
-        if(p_obj_bubble != undefined) var obj = p_obj_bubble;
-        else var obj = p_obj;
-        if(obj != bubble_param){
-          var value = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration);
-          if(id == 'size') p.radius_bubble = value;
-          if(id == 'opacity') p.opacity_bubble = value;
+        if(!pJS.tmp.bubble_duration_end){
+          if(dist_mouse <= pJS.interactivity.modes.bubble.distance){
+            if(p_obj_bubble != undefined) var obj = p_obj_bubble;
+            else var obj = p_obj;
+            if(obj != bubble_param){
+              var value = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration);
+              if(id == 'size') p.radius_bubble = value;
+              if(id == 'opacity') p.opacity_bubble = value;
+            }
+          }else{
+            if(id == 'size') p.radius_bubble = undefined;
+            if(id == 'opacity') p.opacity_bubble = undefined;
+          }
+        }else{
+          if(p_obj_bubble != undefined){
+            var value_tmp = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration),
+                dif = bubble_param - value_tmp;
+                value = bubble_param + dif;
+            if(id == 'size') p.radius_bubble = value;
+            if(id == 'opacity') p.opacity_bubble = value;
+          }
         }
-      }else{
-        if(id == 'size') p.radius_bubble = undefined;
-        if(id == 'opacity') p.opacity_bubble = undefined;
-      }
-    }else{
-      if(p_obj_bubble != undefined){
-        var value_tmp = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration),
-            dif = bubble_param - value_tmp;
-            value = bubble_param + dif;
-        if(id == 'size') p.radius_bubble = value;
-        if(id == 'opacity') p.opacity_bubble = value;
-      }
-    }
 
-  }
+      }
 
-},
+    },
 
 
 
   pJS(tag_id, params){
-
+  const that = this;
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
 
   /* particles.js variables with default values */
@@ -385,7 +387,8 @@ this.particlesJS('particles-js',
 
   /* params settings */
   if(params){
-    this.deepExtend(pJS, params);
+    //this.deepExtend(pJS, params);
+    this.deepExtendFunction(pJS, params);
   }
 
   pJS.tmp.obj = {
@@ -546,7 +549,7 @@ this.particlesJS('particles-js',
     }
     else if(typeof(color.value) == 'string'){
       this.color = color;
-      this.color.rgb = this.hexToRgb(this.color.value);
+      this.color.rgb = that.hexToRgb(this.color.value);
     }
 
     /* opacity */
@@ -834,15 +837,15 @@ this.particlesJS('particles-js',
       }
 
       /* events */
-      if(this.isInArray('grab', pJS.interactivity.events.onhover.mode)){
+      if(that.isInArray('grab', pJS.interactivity.events.onhover.mode)){
         pJS.fn.modes.grabParticle(p);
       }
 
-      if(this.isInArray('bubble', pJS.interactivity.events.onhover.mode) || this.isInArray('bubble', pJS.interactivity.events.onclick.mode)){
+      if(that.isInArray('bubble', pJS.interactivity.events.onhover.mode) || that.isInArray('bubble', pJS.interactivity.events.onclick.mode)){
         pJS.fn.modes.bubbleParticle(p);
       }
 
-      if(this.isInArray('repulse', pJS.interactivity.events.onhover.mode) || this.isInArray('repulse', pJS.interactivity.events.onclick.mode)){
+      if(that.isInArray('repulse', pJS.interactivity.events.onhover.mode) || that.isInArray('repulse', pJS.interactivity.events.onclick.mode)){
         pJS.fn.modes.repulseParticle(p);
       }
 
@@ -1029,7 +1032,7 @@ this.particlesJS('particles-js',
   pJS.fn.modes.bubbleParticle = function(p){
 
     /* on hover event */
-    if(pJS.interactivity.events.onhover.enable && this.isInArray('bubble', pJS.interactivity.events.onhover.mode)){
+    if(pJS.interactivity.events.onhover.enable && that.isInArray('bubble', pJS.interactivity.events.onhover.mode)){
 
       var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
           dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
@@ -1095,7 +1098,7 @@ this.particlesJS('particles-js',
     }
 
     /* on click event */
-    else if(pJS.interactivity.events.onclick.enable && this.isInArray('bubble', pJS.interactivity.events.onclick.mode)){
+    else if(pJS.interactivity.events.onclick.enable && that.isInArray('bubble', pJS.interactivity.events.onclick.mode)){
 
 
       if(pJS.tmp.bubble_clicking){
@@ -1130,7 +1133,7 @@ this.particlesJS('particles-js',
 
   pJS.fn.modes.repulseParticle = function(p){
 
-    if(pJS.interactivity.events.onhover.enable && this.isInArray('repulse', pJS.interactivity.events.onhover.mode) && pJS.interactivity.status == 'mousemove') {
+    if(pJS.interactivity.events.onhover.enable && that.isInArray('repulse', pJS.interactivity.events.onhover.mode) && pJS.interactivity.status == 'mousemove') {
 
       var dx_mouse = p.x - pJS.interactivity.mouse.pos_x,
           dy_mouse = p.y - pJS.interactivity.mouse.pos_y,
@@ -1157,7 +1160,7 @@ this.particlesJS('particles-js',
     }
 
 
-    else if(pJS.interactivity.events.onclick.enable && this.isInArray('repulse', pJS.interactivity.events.onclick.mode)) {
+    else if(pJS.interactivity.events.onclick.enable && that.isInArray('repulse', pJS.interactivity.events.onclick.mode)) {
 
       if(!pJS.tmp.repulse_finish){
         pJS.tmp.repulse_count++;
@@ -1520,29 +1523,29 @@ this.particlesJS('particles-js',
 
         if(pJS.tmp.count_svg >= pJS.particles.number.value){
           pJS.fn.particlesDraw();
-          if(!pJS.particles.move.enable) window.cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
-          else pJS.fn.drawAnimFrame = window.requestAnimFrame(pJS.fn.vendors.draw);
+          if(!pJS.particles.move.enable) that.cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+          else pJS.fn.drawAnimFrame = that.requestAnimFrame(pJS.fn.vendors.draw);
         }else{
           //console.log('still loading...');
-          if(!pJS.tmp.img_error) pJS.fn.drawAnimFrame = window.requestAnimFrame(pJS.fn.vendors.draw);
+          if(!pJS.tmp.img_error) pJS.fn.drawAnimFrame = that.requestAnimFrame(pJS.fn.vendors.draw);
         }
 
       }else{
 
         if(pJS.tmp.img_obj != undefined){
           pJS.fn.particlesDraw();
-          if(!pJS.particles.move.enable) window.cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
-          else pJS.fn.drawAnimFrame = window.requestAnimFrame(pJS.fn.vendors.draw);
+          if(!pJS.particles.move.enable) that.cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+          else pJS.fn.drawAnimFrame = that.requestAnimFrame(pJS.fn.vendors.draw);
         }else{
-          if(!pJS.tmp.img_error) pJS.fn.drawAnimFrame = window.requestAnimFrame(pJS.fn.vendors.draw);
+          if(!pJS.tmp.img_error) pJS.fn.drawAnimFrame = that.requestAnimFrame(pJS.fn.vendors.draw);
         }
 
       }
 
     }else{
       pJS.fn.particlesDraw();
-      if(!pJS.particles.move.enable) window.cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
-      else pJS.fn.drawAnimFrame = window.requestAnimFrame(pJS.fn.vendors.draw);
+      if(!pJS.particles.move.enable) that.cancelRequestAnimFrame(pJS.fn.drawAnimFrame);
+      else pJS.fn.drawAnimFrame = that.requestAnimFrame(pJS.fn.vendors.draw);
     }
 
   };
@@ -1554,10 +1557,10 @@ this.particlesJS('particles-js',
     if(pJS.particles.shape.type == 'image'){
 
       if(pJS.tmp.img_type == 'svg' && pJS.tmp.source_svg == undefined){
-        pJS.tmp.checkAnimFrame = window.requestAnimFrame();
+        pJS.tmp.checkAnimFrame = that.requestAnimFrame();
       }else{
         //console.log('images loaded! cancel check');
-        window.cancelRequestAnimFrame(pJS.tmp.checkAnimFrame);
+        that.cancelRequestAnimFrame(pJS.tmp.checkAnimFrame);
         if(!pJS.tmp.img_error){
           pJS.fn.vendors.init();
           pJS.fn.vendors.draw();
@@ -1584,14 +1587,13 @@ this.particlesJS('particles-js',
     pJS.fn.vendors.densityAutoParticles();
 
     /* particles.line_linked - convert hex colors to rgb */
-    pJS.particles.line_linked.color_rgb_line = this.hexToRgb(pJS.particles.line_linked.color);
+    pJS.particles.line_linked.color_rgb_line = that.hexToRgb(pJS.particles.line_linked.color);
 
   };
 
 
   pJS.fn.vendors.start = function(){
-
-    if(this.isInArray('image', pJS.particles.shape.type)){
+    if(that.isInArray('image', pJS.particles.shape.type)){
       pJS.tmp.img_type = pJS.particles.shape.image.src.substr(pJS.particles.shape.image.src.length - 3);
       pJS.fn.vendors.loadImg(pJS.tmp.img_type);
     }else{
