@@ -31,14 +31,29 @@
         </div>
       </div>
     </div>
-    <!-- <div slot="aside" style="width:250px">这是侧边栏</div> -->
-    <div slot="main">这是内容</div>
-    <div slot="footer">这是下方</div>
+    <div slot="aside" style="width:250px">
+      
+    </div>
+    <div slot="main">
+      <card
+        name="测试项目"
+        time="2022-01-01"
+        describe="第一个测试卡片"
+        path="abc"
+        label="数据结构"
+        classify="js"
+        >
+      </card>
+
+    </div>
+    <!-- <div slot="footer">这是下方</div> -->
   </base-layout>
 </template>
 
 <script>
+import Card from '../../components/Card.vue'
 export default {
+  components: { Card },
   data(){
     return {
       mode : "day"

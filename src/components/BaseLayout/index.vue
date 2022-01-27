@@ -4,11 +4,11 @@
       <slot name="header"></slot>
     </div>
     <div class="base-main-medium">
-      <div class="base-main-aside">
-        <slot name="aside"></slot>
-      </div>
       <div class="base-main-main">
         <slot name="main"></slot>
+      </div>
+      <div class="base-main-aside">
+        <slot name="aside"></slot>
       </div>
     </div>
     <div class="base-main-footer">
@@ -45,6 +45,9 @@ export default {
   display: flex;
   /* flex: row; */
   align-items: stretch;
+  margin: 0 auto;
+  padding: 2rem 15px;
+  max-width: 1200px;
 }
 .base-main-aside{
   /* background-color: green; */
