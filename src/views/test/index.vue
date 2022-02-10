@@ -37,7 +37,7 @@
     <div slot="main">
       <card
         name="测试项目"
-        time="2022-01-01"
+        createTime="2022-01-01"
         describe="第一个测试卡片"
         path="abc"
         label="数据结构"
@@ -67,7 +67,7 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: white;
+  background-color: rgb(245, 245, 245);
 }
 .header{
   height: 100%;
@@ -79,6 +79,7 @@ export default {
   display: flex;
   /* justify-content: center; */
   align-items: stretch;
+  background-color: #fff;
 }
 .el-menu-item{
   border: 0px;

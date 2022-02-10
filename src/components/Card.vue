@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div>
     <a 
       class="card-title" 
       :title="name" 
@@ -8,26 +9,26 @@
       </a>
     <div class="card-meta">
       <span >
-        <i></i>
+        <i class="icon-time icon"></i>
         <span>created</span>
         <time 
-          :datetime="time"
-          :title="time"
+          :datetime="createTime"
+          :title="createTime"
           >
-          {{time}}
+          {{createTime}}
           </time>
       </span>
       <span>
-        <span></span>
-        <i></i>
+        <span>|</span>
+        <i class="icon-class icon"></i>
         <a 
           class=""
           href="#">
         </a>
       </span>
       <span>
-        <span></span>
-        <i></i>
+        <span>|</span>
+        <i class="icon-label icon"></i>
         <a 
           class=""
           href="#">
@@ -36,6 +37,7 @@
     </div>
     <div class="card-describe"> 
       {{describe}}
+    </div>
     </div>
   </div>
 </template>
@@ -81,6 +83,42 @@ export default {
 
 <style scoped>
 .container{
+    background-color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 2;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20em;
+    border-radius: 12px 8px 8px 12px;
+    transition: all 0.3s;
+}
+.container :hover{
+  box-shadow: 10px 10px 5px #888888;
+}
+.card-meta{
+  display: flex;
+}
 
+.icon{
+  display: inline-block;
+  vertical-align: middle;
+	background-repeat: no-repeat;
+  background-position: center center;
+  width:25px;
+  height: 25px;
+}
+.icon-time{
+  content: url("../../assets/cleander.svg");
+}
+.icon-class{
+  content: url("../../assets/classify.svg");
+}
+.icon-label{
+  content: url("../../assets/label.svg");
 }
 </style>

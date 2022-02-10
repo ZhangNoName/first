@@ -31,7 +31,7 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  /* background-color: #fff; */
   padding: 0;
 }
 .base-main-header{
@@ -48,6 +48,7 @@ export default {
   margin: 0 auto;
   padding: 2rem 15px;
   max-width: 1200px;
+  padding: 40 15;
 }
 .base-main-aside{
   /* background-color: green; */
