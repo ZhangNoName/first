@@ -113,12 +113,12 @@ export default {
   height: 25px;
 }
 .icon-time{
-  content: url("../../assets/cleander.svg");
+  content: url('../assets/cleander.svg');
 }
 .icon-class{
-  content: url("../../assets/classify.svg");
+  content: url("../assets/classify.svg");
 }
 .icon-label{
-  content: url("../../assets/label.svg");
+  content: url("../assets/label.svg");
 }
 </style>
