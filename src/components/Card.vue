@@ -1,43 +1,43 @@
 <template>
   <div class="container">
-    <div>
-    <a 
-      class="card-title" 
-      :title="name" 
-      :href="path">
-      {{name}}
-      </a>
-    <div class="card-meta">
-      <span >
-        <i class="icon-time icon"></i>
-        <span>created</span>
-        <time 
-          :datetime="createTime"
-          :title="createTime"
-          >
-          {{createTime}}
-          </time>
-      </span>
-      <span>
-        <span>|</span>
-        <i class="icon-class icon"></i>
-        <a 
-          class=""
-          href="#">
+    <div class="card-main">
+      <a 
+        class="card-title" 
+        :title="name" 
+        :href="path">
+        {{name}}
         </a>
-      </span>
-      <span>
-        <span>|</span>
-        <i class="icon-label icon"></i>
-        <a 
-          class=""
-          href="#">
-        </a>
-      </span>
-    </div>
-    <div class="card-describe"> 
-      {{describe}}
-    </div>
+      <div class="card-meta">
+        <span >
+          <i class="icon-time icon"></i>
+          <span>created</span>
+          <time 
+            :datetime="createTime"
+            :title="createTime"
+            >
+            {{createTime}}
+            </time>
+        </span>
+        <span>
+          <span class="card-span">|</span>
+          <i class="icon-class icon"></i>
+          <a 
+            class=""
+            href="#">
+          </a>
+        </span>
+        <span>
+          <span class="card-span">|</span>
+          <i class="icon-label icon"></i>
+          <a 
+            class=""
+            href="#">
+          </a>
+        </span>
+      </div>
+      <div class="card-describe"> 
+        {{describe}}
+      </div>
     </div>
   </div>
 </template>
@@ -93,15 +93,26 @@ export default {
     flex-direction: row;
     -webkit-box-align: center;
     align-items: center;
-    height: 20em;
+    height: 280px;
+    
     border-radius: 12px 8px 8px 12px;
     transition: all 0.3s;
 }
-.container :hover{
+.container:hover{
   box-shadow: 10px 10px 5px #888888;
+}
+.card-main{
+  padding: 0 40px;
+}
+.card-title{
+  margin-bottom: 6px;
+}
+.card-describe{
+  margin-top: 6px;
 }
 .card-meta{
   display: flex;
+  color: rgb(133, 133, 133);
 }
 
 .icon{
@@ -109,8 +120,8 @@ export default {
   vertical-align: middle;
 	background-repeat: no-repeat;
   background-position: center center;
-  width:25px;
-  height: 25px;
+  width:15px;
+  height: 15px;
 }
 .icon-time{
   content: url('../assets/cleander.svg');
@@ -120,5 +131,8 @@ export default {
 }
 .icon-label{
   content: url("../assets/label.svg");
+}
+.card-span{
+  margin: 0 6px;
 }
 </style>
