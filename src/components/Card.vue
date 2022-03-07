@@ -24,6 +24,7 @@
           <a 
             class=""
             href="#">
+            {{classify}}
           </a>
         </span>
         <span>
@@ -32,6 +33,7 @@
           <a 
             class=""
             href="#">
+            {{label}}
           </a>
         </span>
       </div>
@@ -82,6 +84,9 @@ export default {
 </script>
 
 <style scoped>
+a{
+  display: inline-block;
+}
 .container{
     background-color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -109,6 +114,7 @@ export default {
 }
 .card-describe{
   margin-top: 6px;
+  color: rgb(133, 133, 133);
 }
 .card-meta{
   display: flex;

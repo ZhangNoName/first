@@ -44,7 +44,15 @@
         classify="js"
         >
       </card>
-
+      <card
+        name="测试项目2"
+        createTime="2022-02-01"
+        describe="第二个测试卡片"
+        path="abc"
+        label="数据结构"
+        classify="js"
+        >
+      </card>
     </div>
     <!-- <div slot="footer">这是下方</div> -->
   </base-layout>
@@ -54,11 +62,16 @@
 import Card from '../../components/Card.vue'
 export default {
   components: { Card },
-  data(){
+  data () {
     return {
       mode : "day"
     }
-  }
+  },
+  created () {
+
+  },
+
+
 }
 </script>
 
@@ -138,4 +151,15 @@ export default {
 .icon-night{
   content: url("../../assets/night.svg");
 }
+/* .text {
+  position: absolute;
+  z-index: 9999999;
+  font-weight: bold;
+  user-select: none;
+}
+@keyframes remove {
+  100% {
+    opacity: 0;
+  }
+} */
 </style>
