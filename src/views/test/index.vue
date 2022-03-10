@@ -53,6 +53,15 @@
         classify="js"
         >
       </card>
+      <card
+        name="测试项目3"
+        createTime="2022-03-01"
+        describe="第三个测试卡片"
+        path="abc"
+        label="数据结构"
+        classify="js"
+        >
+      </card>
     </div>
     <!-- <div slot="footer">这是下方</div> -->
   </base-layout>
@@ -83,8 +92,10 @@ export default {
   background-color: rgb(245, 245, 245);
 }
 .header{
-  height: 100%;
+  /* height: 100%; */
+  width: 100%;
 }
+
 .headerContain{
   height: 60px;
   padding: 0 36px;

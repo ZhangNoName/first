@@ -1,8 +1,9 @@
 <template>
-  <div class="base-main">
-    <div class="base-main-header">
+<div class="base">
+  <div class="base-main-header">
       <slot name="header"></slot>
     </div>
+  <!-- <div class="base-main"> -->
     <div class="base-main-medium">
       <div class="base-main-main">
         <slot name="main"></slot>
@@ -11,10 +12,11 @@
         <slot name="aside"></slot>
       </div>
     </div>
-    <div class="base-main-footer">
+    <!-- <div class="base-main-footer">
       <slot name="footer"></slot>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
+</div>
 </template>
 
 <script>
@@ -23,32 +25,48 @@ export default {
 }
 </script>
 
-<style scoped>
+<style  scoped>
+.base{
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
 .base-main{
   position: relative;
-  overflow: hidden;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
   /* background-color: #fff; */
   padding: 0;
+  margin-top: 30px;
 }
 .base-main-header{
   /* background-color: blue; */
-  max-height: 200px;
-  min-height: 25px;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
 }
 .base-main-medium {
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 60px);
   display: flex;
   /* flex: row; */
   align-items: stretch;
-  margin: 0 auto;
-  padding: 2rem 15px;
-  max-width: 1200px;
-  padding: 40 15;
+  /* max-width: 1200px; */
+  /* padding: 0px 15px; */
+  overflow-y: scroll;
+  overflow-x: auto;
+  margin-bottom: 60px;
+  top: 60px;
+  
+}
+.base-main-medium::-webkit-scrollbar-track{
+  background: #000;
 }
 .base-main-aside{
   /* background-color: green; */

@@ -102,6 +102,7 @@ a{
     
     border-radius: 12px 8px 8px 12px;
     transition: all 0.3s;
+    margin-top: 20px;
 }
 .container:hover{
   box-shadow: 10px 10px 5px #888888;
