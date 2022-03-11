@@ -1,45 +1,21 @@
 <template>
   <div class="container">
-    <div class="card-main">
-      <a 
-        class="card-title" 
-        :title="name" 
-        :href="path">
-        {{name}}
-        </a>
-      <div class="card-meta">
-        <span >
-          <i class="icon-time icon"></i>
-          <span>created</span>
-          <time 
-            :datetime="createTime"
-            :title="createTime"
-            >
-            {{createTime}}
-            </time>
-        </span>
-        <span>
-          <span class="card-span">|</span>
-          <i class="icon-class icon"></i>
-          <a 
-            class=""
-            href="#">
-            {{classify}}
-          </a>
-        </span>
-        <span>
-          <span class="card-span">|</span>
-          <i class="icon-label icon"></i>
-          <a 
-            class=""
-            href="#">
-            {{label}}
-          </a>
-        </span>
-      </div>
-      <div class="card-describe"> 
-        {{describe}}
-      </div>
+    <div class="base-info">
+      <img 
+        :src="headPortrait"
+        alt="头像"
+        >
+      <div class="base-name">{{name}}</div>
+      <div class="base-intro">{{introduce}}</div>
+    </div>
+    <div class="base-data">
+    </div>
+    <a href="#"></a>
+    <div class="base-social-icon">
+      <i class="icon-class icon"></i>
+      <i class="icon-class icon"></i>
+      <i class="icon-class icon"></i>
+      <i class="icon-class icon"></i>
     </div>
   </div>
 </template>
@@ -51,26 +27,43 @@ export default {
       type : String,
       required : true,
     },
-    classify : {
+    headPortrait : {
       type : String,
       required : true,
     },
-    label : {
+    github : {
       type : [String, Array],
       required : true,
     },
-    createTime : {
+    email : {
       type : String,
       required : true,
     },
-    describe : {
+    qq : {
       type : String,
       required : true,
     },
-    path : {
+    weChat : {
       type : String,
       required : true,
-    }
+    },
+    introduce : {
+      type : String,
+      required : true,
+    },
+    articlesNum : {
+      type : Number,
+      required : true,
+    },
+    tagsNum : {
+      type : Number,
+      required : true,
+    },
+    categoriesNum : {
+      type : Number,
+      required : true,
+    },
+    
   },
   data () {
     return {
@@ -98,8 +91,8 @@ a{
     flex-direction: row;
     -webkit-box-align: center;
     align-items: center;
-    height: 280px;
-    max-width: 850px;
+    height: 400px;
+    max-width: 380px;
     border-radius: 12px 8px 8px 12px;
     transition: all 0.3s;
     margin-top: 20px;
@@ -107,17 +100,17 @@ a{
 .container:hover{
   box-shadow: 10px 10px 5px #888888;
 }
-.card-main{
+.info-main{
   padding: 0 40px;
 }
-.card-title{
+.info-title{
   margin-bottom: 6px;
 }
-.card-describe{
+.info-describe{
   margin-top: 6px;
   color: rgb(133, 133, 133);
 }
-.card-meta{
+.info-meta{
   display: flex;
   color: rgb(133, 133, 133);
 }
@@ -130,16 +123,7 @@ a{
   width:15px;
   height: 15px;
 }
-.icon-time{
-  content: url('../assets/cleander.svg');
-}
-.icon-class{
-  content: url("../assets/classify.svg");
-}
-.icon-label{
-  content: url("../assets/label.svg");
-}
-.card-span{
+.info-span{
   margin: 0 6px;
 }
 </style>

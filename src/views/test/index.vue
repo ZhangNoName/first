@@ -62,6 +62,15 @@
         classify="js"
         >
       </card>
+      <card
+        name="测试项目4"
+        createTime="2022-03-01"
+        describe="第四个测试卡片"
+        path="abc"
+        label="数据结构"
+        classify="js"
+        >
+      </card>
     </div>
     <!-- <div slot="footer">这是下方</div> -->
   </base-layout>
@@ -101,7 +110,7 @@ export default {
   padding: 0 36px;
   line-height:2;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: stretch;
   background-color: #fff;
 }

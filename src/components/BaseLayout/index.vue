@@ -61,8 +61,9 @@ export default {
   /* padding: 0px 15px; */
   overflow-y: scroll;
   overflow-x: auto;
-  margin-bottom: 60px;
+  margin: 0 auto;
   top: 60px;
+  
   
 }
 .base-main-medium::-webkit-scrollbar-track{
@@ -73,7 +74,9 @@ export default {
 }
 .base-main-main{
   /* background-color: red; */
+  margin-left: 46px;
   flex: 1 1 auto;
+  width: 100%;
 }
 .base-main-footer{
   /* background-color: yellow; */
