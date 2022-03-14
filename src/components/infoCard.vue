@@ -2,16 +2,17 @@
   <div class="container">
     <div class="base-info">
       <img 
+        class="info-img"
         :src="headPortrait"
         alt="头像"
         >
-      <div class="base-name">{{name}}</div>
-      <div class="base-intro">{{introduce}}</div>
+      <div class="info-name">{{name}}</div>
+      <div class="info-intro">{{introduce}}</div>
     </div>
-    <div class="base-data">
+    <div class="info-data">
     </div>
     <a href="#"></a>
-    <div class="base-social-icon">
+    <div class="info-social-icon">
       <i class="icon-class icon"></i>
       <i class="icon-class icon"></i>
       <i class="icon-class icon"></i>
@@ -70,6 +71,11 @@ export default {
 
     }
   },
+  computed : {
+    imagePath () {
+      return require('@/assets/headImg.jpg')
+    }
+  },
   methods: {
 
   }
@@ -100,6 +106,18 @@ a{
 .container:hover{
   box-shadow: 10px 10px 5px #888888;
 }
+.base-info{
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+.info-img{
+  width: 110px;
+  height: 110px;
+}
 .info-main{
   padding: 0 40px;
 }
@@ -126,4 +144,5 @@ a{
 .info-span{
   margin: 0 6px;
 }
+
 </style>

@@ -72,17 +72,48 @@
         >
       </card>
     </div>
+    <div slot="aside">
+      <info-card
+        :name="baseInfo.name"
+        :headPortrait="baseInfo.headPortrait"
+        :github="baseInfo.github"
+        :email="baseInfo.email"
+        :qq="baseInfo.qq"
+        :weChat="baseInfo.weChat"
+        :introduce="baseInfo.introduce"
+        :articlesNum="baseInfo.articlesNum"
+        :tagsNum="baseInfo.tagsNum"
+        :categoriesNum="baseInfo.categoriesNum"
+      >
+      </info-card>
+    </div>
     <!-- <div slot="footer">这是下方</div> -->
   </base-layout>
 </template>
 
 <script>
-import Card from '../../components/Card.vue'
+import Card from '@/components/Card.vue'
+import InfoCard from '@/components/infoCard.vue'
 export default {
-  components: { Card },
+  components: { 
+    Card ,
+    InfoCard,
+  },
   data () {
     return {
-      mode : "day"
+      mode : "day",
+      baseInfo : {
+        name : "测试名称",
+        headPortrait : '../../static/headImg.jpg',
+        github : "https://github.com/",
+        email : "1623190186@qq.com",
+        qq : "1623190186",
+        weChat : "暂无",
+        introduce : "一个开发者",
+        articlesNum : 10,
+        tagsNum : 20,
+        categoriesNum : 3,
+      }
     }
   },
   created () {
