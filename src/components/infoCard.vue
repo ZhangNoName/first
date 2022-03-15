@@ -3,15 +3,35 @@
     <div class="base-info">
       <img 
         class="info-img"
-        :src="headPortrait"
+        :src="imagePath"
         alt="头像"
         >
       <div class="info-name">{{name}}</div>
       <div class="info-intro">{{introduce}}</div>
     </div>
     <div class="info-data">
+      <div class="info-data-item">
+        <a href="#">
+          <div class="info-data-title">Articles</div>
+          <div class="info-data-num">5</div>
+        </a>
+      </div>
+      <div class="info-data-item">
+        <a href="#">
+          <div class="info-data-title">Tags</div>
+          <div class="info-data-num">3</div>
+        </a>
+      </div>
+      <div class="info-data-item">
+        <a href="#">
+          <div class="info-data-title">Categories</div>
+          <div class="info-data-num">15</div>
+        </a>
+      </div>
     </div>
-    <a href="#"></a>
+    <a class="info-github" target="_blank" href="#">
+      <i :class="['icon','info-github-icon']"></i>
+    </a>
     <div class="info-social-icon">
       <i class="icon-class icon"></i>
       <i class="icon-class icon"></i>
@@ -84,7 +104,7 @@ export default {
 
 <style scoped>
 a{
-  display: inline-block;
+  display: block;
 }
 .container{
     background-color: white;
@@ -94,11 +114,11 @@ a{
     box-sizing: border-box;
     display: flex;
     -webkit-box-orient: horizontal;
-    flex-direction: row;
+    flex-direction: column;
     -webkit-box-align: center;
     align-items: center;
     height: 400px;
-    max-width: 380px;
+    width: 280px;
     border-radius: 12px 8px 8px 12px;
     transition: all 0.3s;
     margin-top: 20px;
@@ -115,24 +135,54 @@ a{
 
 }
 .info-img{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  text-align: center;
+  box-sizing: border-box;
+  border-width: initial;
+  border-color: initial;
+  border-image: initial;
+  border-style: none;
+  max-width: 100%;
   width: 110px;
   height: 110px;
+
+  transition: all 0.5s;
+  border-radius: 50%;
+  /* border-color: blue;
+  border-style: solid; */
+  
 }
-.info-main{
-  padding: 0 40px;
+.info-img:hover{
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
-.info-title{
-  margin-bottom: 6px;
+.info-name{
+  justify-content: center;
+  font-weight: 500;
+  font-size: 21px;
 }
-.info-describe{
+.info-intro{
   margin-top: 6px;
   color: rgb(133, 133, 133);
 }
-.info-meta{
+.info-data{
+  width: 80%;
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   color: rgb(133, 133, 133);
+  color: black;
 }
+.info-data-item{
 
+}
+.info-data-title{
+
+}
+.info-data-num{
+  text-align: center;
+  
+}
 .icon{
   display: inline-block;
   vertical-align: middle;
@@ -140,6 +190,9 @@ a{
   background-position: center center;
   width:15px;
   height: 15px;
+}
+.info-github-icon{
+    content: url('/assets/github.svg');
 }
 .info-span{
   margin: 0 6px;

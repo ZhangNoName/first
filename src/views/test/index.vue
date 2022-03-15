@@ -34,7 +34,7 @@
     <div slot="aside" style="width:250px">
       
     </div>
-    <div slot="main">
+    <div slot="main" >
       <card
         name="测试项目"
         createTime="2022-01-01"

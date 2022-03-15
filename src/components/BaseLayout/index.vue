@@ -52,7 +52,7 @@ export default {
 }
 .base-main-medium {
   position: relative;
-  width: 100%;
+  /* width: 100%; */
   height: calc(100% - 60px);
   display: flex;
   /* flex: row; */
@@ -63,8 +63,7 @@ export default {
   overflow-x: auto;
   margin: 0 auto;
   top: 60px;
-  
-  
+  padding: 0 40px;
 }
 .base-main-medium::-webkit-scrollbar-track{
   background: #000;
@@ -74,9 +73,10 @@ export default {
 }
 .base-main-main{
   /* background-color: red; */
-  margin-left: 46px;
+  /* margin-left: 46px; */
   flex: 1 1 auto;
-  width: 100%;
+
+  /* width: 100%; */
 }
 .base-main-footer{
   /* background-color: yellow; */
