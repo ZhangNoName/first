@@ -131,13 +131,13 @@ a{
   height: 15px;
 }
 .icon-time{
-  content: url('../assets/cleander.svg');
+  content: url('../icons/svg/cleander.svg');
 }
 .icon-class{
-  content: url("../assets/classify.svg");
+  content: url("../icons/svg/classify.svg");
 }
 .icon-label{
-  content: url("../assets/label.svg");
+  content: url("../icons/svg/label.svg");
 }
 .card-span{
   margin: 0 6px;

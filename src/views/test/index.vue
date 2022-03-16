@@ -104,7 +104,7 @@ export default {
       mode : "day",
       baseInfo : {
         name : "测试名称",
-        headPortrait : '../../static/headImg.jpg',
+        headPortrait : '../../icons/jpg/headImg.jpg',
         github : "https://github.com/",
         email : "1623190186@qq.com",
         qq : "1623190186",
@@ -188,19 +188,19 @@ export default {
   height: 25px;
 }
 .icon-github{
-  content: url("../../assets/github.svg");
+  content: url("../../icons/svg/github.svg");
 }
 .icon-search{
-  content: url("../../assets/search.svg");
+  content: url("../../icons/svg/search.svg");
 }
 .icon-csdn{
-  content: url("../../assets/csdn.svg");
+  content: url("../../icons/svg/csdn.svg");
 }
 .icon-day{
-  content: url("../../assets/day.svg");
+  content: url("../../icons/svg/day.svg");
 }
 .icon-night{
-  content: url("../../assets/night.svg");
+  content: url("../../icons/svg/night.svg");
 }
 /* .text {
   position: absolute;

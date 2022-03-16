@@ -30,13 +30,14 @@
       </div>
     </div>
     <a class="info-github" target="_blank" href="#">
-      <i :class="['icon','info-github-icon']"></i>
+       <i id="icon-github" :class="['info-github-icon']"></i>
+      点我！！！
     </a>
     <div class="info-social-icon">
-      <i class="icon-class icon"></i>
-      <i class="icon-class icon"></i>
-      <i class="icon-class icon"></i>
-      <i class="icon-class icon"></i>
+      <i class="icon-github icon"></i>
+      <i class="icon-email icon"></i>
+      <i class="icon-qq icon"></i>
+      <i class="icon-weChat icon"></i>
     </div>
   </div>
 </template>
@@ -93,7 +94,7 @@ export default {
   },
   computed : {
     imagePath () {
-      return require('@/assets/headImg.jpg')
+      return require('../icons/jpg/headImg.jpg')
     }
   },
   methods: {
@@ -106,6 +107,7 @@ export default {
 a{
   display: block;
 }
+
 .container{
     background-color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -122,6 +124,7 @@ a{
     border-radius: 12px 8px 8px 12px;
     transition: all 0.3s;
     margin-top: 20px;
+    padding: 20px 24px;
 }
 .container:hover{
   box-shadow: 10px 10px 5px #888888;
@@ -166,7 +169,7 @@ a{
   color: rgb(133, 133, 133);
 }
 .info-data{
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -181,21 +184,57 @@ a{
 }
 .info-data-num{
   text-align: center;
-  
+}
+.info-ghithub{
+    box-sizing: border-box;
+    text-decoration: none;
+    overflow-wrap: break-word;
+    position: relative;
+    z-index: 1;
+    transition: color 1s;
+    display: block;
+    margin-top: 0.7rem;
+    text-align: center;
+    height: 20px;
+    width: 100%;
+}
+#icon-github::before{
+  background-image: url('../icons/svg/github.svg');
+  background-size: 20px 20px;
+  position: absolute;
+  z-index: 100;
+  width: 20px;
+  height: 20px;
+  content: '';
+  display: flex;
+}
+.info-social-icon{
+  margin-top: 6px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .icon{
   display: inline-block;
   vertical-align: middle;
 	background-repeat: no-repeat;
   background-position: center center;
-  width:15px;
-  height: 15px;
+  width:25px;
+  height: 25px;
 }
-.info-github-icon{
-    content: url('/assets/github.svg');
+.icon-github{
+  content: url('../icons/svg/github.svg');
 }
-.info-span{
-  margin: 0 6px;
+.icon-email{
+  content: url("../icons/svg/email.svg");
 }
+.icon-qq{
+  content: url("../icons/svg/qq.svg");
+}
+.icon-weChat{
+  content: url("../icons/svg/weChat.svg");
+}
+
 
 </style>
