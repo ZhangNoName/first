@@ -29,9 +29,10 @@
         </a>
       </div>
     </div>
-    <a class="info-github" target="_blank" href="#">
-       <i id="icon-github" :class="['info-github-icon']"></i>
-      点我！！！
+    <a class="hvr-bounce-to-right info-github" target="_blank" href="#">
+       <i id="icon-github" class="info-github-icon">
+          点我！！！
+       </i>
     </a>
     <div class="info-social-icon">
       <i class="icon-github icon"></i>
@@ -105,7 +106,7 @@ export default {
 
 <style scoped>
 a{
-  display: block;
+  display: inline-block;
 }
 
 .container{
@@ -148,7 +149,6 @@ a{
   max-width: 100%;
   width: 110px;
   height: 110px;
-
   transition: all 0.5s;
   border-radius: 50%;
   /* border-color: blue;
@@ -185,28 +185,34 @@ a{
 .info-data-num{
   text-align: center;
 }
-.info-ghithub{
-    box-sizing: border-box;
-    text-decoration: none;
-    overflow-wrap: break-word;
+.info-github{
     position: relative;
     z-index: 1;
     transition: color 1s;
-    display: block;
+    display: flex;
     margin-top: 0.7rem;
     text-align: center;
     height: 20px;
     width: 100%;
+    height: 25px;
+    align-items: center;
+    margin: 5px 0;
+    justify-content: center;
 }
 #icon-github::before{
   background-image: url('../icons/svg/github.svg');
-  background-size: 20px 20px;
-  position: absolute;
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
   z-index: 100;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   content: '';
   display: flex;
+}
+.info-github-icon {
+  display: flex ;
+  align-items: center;
+  /* line-height: 25px ; */
 }
 .info-social-icon{
   margin-top: 6px;
@@ -235,6 +241,50 @@ a{
 .icon-weChat{
   content: url("../icons/svg/weChat.svg");
 }
+/* 悬浮动画 */
+.hvr-bounce-to-right {
+  /* display: inline-block;
+  vertical-align: middle; */
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  background-color: rgb(73, 177, 245);
+}
+.hvr-bounce-to-right:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ff7242;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {
+  color: white;
+}
+.hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
 
 
 </style>
