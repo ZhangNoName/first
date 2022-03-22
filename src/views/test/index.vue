@@ -105,7 +105,7 @@ export default {
       baseInfo : {
         name : "测试名称",
         headPortrait : '../../icons/jpg/headImg.jpg',
-        github : "https://github.com/",
+        github : "https://github.com/ZhangNoName?tab=repositories",
         email : "1623190186@qq.com",
         qq : "1623190186",
         weChat : "暂无",

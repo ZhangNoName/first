@@ -29,16 +29,27 @@
         </a>
       </div>
     </div>
-    <a class="hvr-bounce-to-right info-github" target="_blank" href="#">
-       <i id="icon-github" class="info-github-icon">
+    <a class="hvr-bounce-to-right info-github" target="_blank" :href="github">
+       <!-- <i id="icon-github" class="info-github-icon">
           点我！！！
-       </i>
+       </i> -->
+      <i class="fa-brands fa-github"></i>
+      <span class="info-github-span">Fellow me</span>
+
     </a>
     <div class="info-social-icon">
-      <i class="icon-github icon"></i>
-      <i class="icon-email icon"></i>
-      <i class="icon-qq icon"></i>
-      <i class="icon-weChat icon"></i>
+      <a href="#">
+        <i class="icon-github icon"></i>
+      </a>
+      <a href="#">
+        <i class="icon-email icon"></i>
+      </a>
+      <a href="#">
+        <i class="icon-qq icon"></i>
+      </a>
+      <a href="#">
+        <i class="icon-weChat icon"></i>
+      </a>
     </div>
   </div>
 </template>
@@ -187,17 +198,21 @@ a{
 }
 .info-github{
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
     transition: color 1s;
     display: flex;
     margin-top: 0.7rem;
     text-align: center;
     height: 20px;
     width: 100%;
-    height: 25px;
+    height: 35px;
     align-items: center;
     margin: 5px 0;
     justify-content: center;
+    color: rgb(255, 255, 255);
+}
+.info-github-span{
+  padding-left: 5px;
 }
 #icon-github::before{
   background-image: url('../icons/svg/github.svg');
@@ -275,10 +290,10 @@ a{
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-.hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {
+.hvr-bounce-to-right:hover{
   color: white;
 }
-.hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {
+.hvr-bounce-to-right:hover:before{
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
   -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);

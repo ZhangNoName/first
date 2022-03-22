@@ -81,7 +81,7 @@ export default {
 .text {
   /* position: absolute !important */
   display: inline-block;
-  z-index: 9999999;
+  z-index: 999;
   font-weight: bold;
   user-select: none;
 }

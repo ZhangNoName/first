@@ -63,7 +63,7 @@ export default {
   overflow-x: auto;
   margin: 0 auto;
   top: 60px;
-  padding: 0 40px;
+  padding: 0 60px 0 40px;
 }
 .base-main-medium::-webkit-scrollbar-track{
   background: #000;
