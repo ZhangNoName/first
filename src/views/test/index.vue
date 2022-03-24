@@ -71,6 +71,24 @@
         classify="js"
         >
       </card>
+      <div class="extend">
+      <div>
+        <button>
+          拉伸
+        </button>
+        <button>
+          返回
+        </button>
+      </div>
+      <div>
+        <button>
+          顶部
+        </button>
+        <button>
+          下方
+        </button>
+      </div>
+    </div>
     </div>
     <div slot="aside">
       <info-card
@@ -87,6 +105,7 @@
       >
       </info-card>
     </div>
+
     <!-- <div slot="footer">这是下方</div> -->
   </base-layout>
 </template>
@@ -201,6 +220,24 @@ export default {
 }
 .icon-night{
   content: url("../../icons/svg/night.svg");
+}
+.extend{
+  position: fixed;
+  top: 50%;
+  right: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 9; */
+  height: 50px;
+  width: 50px;
+
+}
+.extend>button{
+  background-color: #000;
+  height: 50px;
+  width: 50px;
 }
 /* .text {
   position: absolute;

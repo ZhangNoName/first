@@ -59,14 +59,16 @@ export default {
   align-items: stretch;
   /* max-width: 1200px; */
   /* padding: 0px 15px; */
-  overflow-y: scroll;
+  overflow-y: overlay;
   overflow-x: auto;
   margin: 0 auto;
   top: 60px;
   padding: 0 60px 0 40px;
 }
-.base-main-medium::-webkit-scrollbar-track{
-  background: #000;
+.base-main-medium::-webkit-scrollbar{
+  /* width: 50px; */
+  background-color: red;
+  width: 10px;
 }
 .base-main-aside{
   /* background-color: green; */
