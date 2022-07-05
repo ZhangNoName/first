@@ -106,7 +106,10 @@ export default {
   },
   computed : {
     imagePath () {
-      return require('../icons/jpg/headImg.jpg')
+      // return '@/icons/jpg/headImg.jpg'
+      console.log('信息：', import.meta)
+      console.log('头像路径：',new URL('../../icons/jpg/headImg.jpg', import.meta.url))
+      return new URL('../icons/jpg/headImg.jpg', import.meta.url).href;
     }
   },
   methods: {
